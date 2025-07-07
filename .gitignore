@@ -2,3 +2,7 @@
 data/
 tools/
 annotations/
+
+# Ignoring unnecessary files
+.Rhistory
+.RData
