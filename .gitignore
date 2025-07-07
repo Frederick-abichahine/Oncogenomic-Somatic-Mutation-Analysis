@@ -1,0 +1,4 @@
+# Ignoring data, tools and annotations directories
+data/
+tools/
+annotations/
