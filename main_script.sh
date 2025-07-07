@@ -69,3 +69,15 @@ samtools flagstat control.sorted.realigned.recalibrated.dedup.bam > control.sort
 java -jar ../tools/picard.jar MarkDuplicates I=tumor.sorted.realigned.recalibrated.bam O=tumor.sorted.realigned.recalibrated.dedup.bam REMOVE_DUPLICATES=true TMP_DIR=/tmp METRICS_FILE=tumor.sorted.realigned.recalibrated.picard.log ASSUME_SORTED=true
 samtools index tumor.sorted.realigned.recalibrated.dedup.bam
 samtools flagstat tumor.sorted.realigned.recalibrated.dedup.bam > tumor.sorted.realigned.recalibrated.dedup.flagstat.txt
+
+################################
+# 5. Somatic Copy Number Calling
+################################
+
+# Generating mpileup files for both control and tumor samples and piping them to VarScan for copy number analysis
+samtools mpileup -q 1 -f ../annotations/human_g1k_v37.fasta control.sorted.realigned.recalibrated.dedup.bam tumor.sorted.realigned.recalibrated.dedup.bam | java -jar ../tools/var_scan.v2.3.9.jar copynumber --output-file SCNA --mpileup 1
+# Calling somatic copy number variations
+java -jar ../tools/var_scan.v2.3.9.jar copyCaller SCNA.copynumber --output-file SCNA.copynumber.called
+
+# Executing R script for Circular Binary Segmentation (CBS) to analyze the somatic copy number variations
+Rscript ../CBS.R
