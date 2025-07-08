@@ -126,7 +126,17 @@ java -Xmx4g -jar ../tools/snpEff/snpEff.jar -v hg19kg tumor.GATK.recode.vcf -s t
 java -Xmx4g -jar ../tools/snpEff/snpSift.jar Annotate ../annotations/hapmap_3.3.b37.vcf tumor.GATK.recode.ann.vcf > tumor.GATK.recode.ann2.vcf
 java -Xmx4g -jar ../tools/snpEff/snpSift.jar Annotate ../annotations/clinvar_pathogenic.vcf tumor.GATK.recode.ann2.vcf > tumor.GATK.recode.ann3.vcf
 
+############################
+# 8. Somatic Variant Calling
+############################
 
-
-#### ../../../labs/annotations
-#### ../../../labs/tools
+# Preparing control and tumor pileup files
+samtools mpileup -q 1 -f ../annotations/human_g1k_v37.fasta control.sorted.realigned.recalibrated.dedup.bam > control.sorted.realigned.recalibrated.dedup.pileup
+samtools mpileup -q 1 -f ../annotations/human_g1k_v37.fasta tumor.sorted.realigned.recalibrated.dedup.bam > tumor.sorted.realigned.recalibrated.dedup.pileup
+# Running VarScan2 for somatic variant calling
+java -jar ../tools/var_scan.v2.3.9.jar somatic control.sorted.realigned.recalibrated.dedup.pileup tumor.sorted.realigned.recalibrated.dedup.pileup --output-snp somatic.pm --output-indel somatic.indel --output-vcf 1
+# Annotating the somatic point mutations
+java -Xmx4g -jar ../tools/snpEff/snpSift.jar Annotate ../annotations/hapmap_3.3.b37.vcf somatic.pm.vcf > somatic.pm.vcf.hapmap_ann.vcf
+# Filtering the annotated VCF file: one for SNPs only and one for non-SNPs
+cat somatic.pm.vcf.hapmap_ann.vcf | java -Xmx4g -jar ../tools/snpEff/snpSift.jar filter "(exists ID) & ( ID =~ 'rs' )" > somatic.pm.onlySNPs.vcf
+cat somatic.pm.vcf.hapmap_ann.vcf | java -Xmx4g -jar ../tools/snpEff/snpSift.jar filter "!(exists ID) & !( ID =~ 'rs' )" > somatic.pm.noSNPs.vcf
