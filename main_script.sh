@@ -103,3 +103,25 @@ java -jar ../tools/genome_analysis_TK.jar -T UnifiedGenotyper -R ../annotations/
 vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf tumor.BCF.vcf --out tumor.BCF --recode --recode-INFO-all
 vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf tumor.GATK.vcf --out tumor.GATK --recode --recode-INFO-all
 vcftools --vcf tumor.BCF.recode.vcf --diff tumor.GATK.recode.vcf --diff-site --out tumor.BCF_vs_GATK
+
+#######################
+# 7. Variant Annotation
+#######################
+
+# Control
+# Annotating variants from bcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpEff.jar -v hg19kg control.BCF.recode.vcf -s control.BCF.recode.ann.html > control.BCF.recode.ann.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/hapmap_3.3.b37.vcf control.BCF.recode.ann.vcf > control.BCF.recode.ann2.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/clinvar_pathogenic.vcf control.BCF.recode.ann2.vcf > control.BCF.recode.ann3.vcf
+# Annotating variants from GATK
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpEff.jar -v hg19kg control.GATK.recode.vcf -s control.GATK.recode.ann.html > control.GATK.recode.ann.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/hapmap_3.3.b37.vcf control.GATK.recode.ann.vcf > control.GATK.recode.ann2.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/clinvar_pathogenic.vcf control.GATK.recode.ann2.vcf > control.GATK.recode.ann3.vcf
+
+# Tumor
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpEff.jar -v hg19kg tumor.BCF.recode.vcf -s tumor.BCF.recode.ann.html > tumor.BCF.recode.ann.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/hapmap_3.3.b37.vcf tumor.BCF.recode.ann.vcf > tumor.BCF.recode.ann2.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/clinvar_pathogenic.vcf tumor.BCF.recode.ann2.vcf > tumor.BCF.recode.ann3.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpEff.jar -v hg19kg tumor.GATK.recode.vcf -s tumor.GATK.recode.ann.html > tumor.GATK.recode.ann.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/hapmap_3.3.b37.vcf tumor.GATK.recode.ann.vcf > tumor.GATK.recode.ann2.vcf
+java -Xmx4g -jar ../../../labs/tools/snpEff/snpSift.jar Annotate ../../../labs/annotations/clinvar_pathogenic.vcf tumor.GATK.recode.ann2.vcf > tumor.GATK.recode.ann3.vcf
