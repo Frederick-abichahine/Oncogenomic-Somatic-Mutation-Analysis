@@ -81,3 +81,25 @@ java -jar ../tools/var_scan.v2.3.9.jar copyCaller SCNA.copynumber --output-file 
 
 # Executing R script for Circular Binary Segmentation (CBS) to analyze the somatic copy number variations
 Rscript ../CBS.R
+
+####################
+# 6. Variant Calling
+####################
+
+# Control
+# Using bcftools to call variants
+bcftools mpileup -Ou -a DP -f ../annotations/human_g1k_v37.fasta control.sorted.realigned.recalibrated.dedup.bam | bcftools call -Ov -c -v > control.BCF.vcf
+# Using GATK to call variants
+java -jar ../tools/genome_analysis_TK.jar -T UnifiedGenotyper -R ../annotations/human_g1k_v37.fasta -I control.sorted.realigned.recalibrated.dedup.bam -o control.GATK.vcf -L ../annotations/captured_regions.bed
+# Filtering the VCF files for the BCF and GATK outputs
+vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf control.BCF.vcf --out control.BCF --recode --recode-INFO-all
+vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf control.GATK.vcf --out control.GATK --recode --recode-INFO-all
+# Comparing the two VCF files
+vcftools --vcf control.BCF.recode.vcf --diff control.GATK.recode.vcf --diff-site --out control.BCF_vs_GATK
+
+# Tumor
+bcftools mpileup -Ou -a DP -f ../annotations/human_g1k_v37.fasta tumor.sorted.realigned.recalibrated.dedup.bam | bcftools call -Ov -c -v > tumor.BCF.vcf
+java -jar ../tools/genome_analysis_TK.jar -T UnifiedGenotyper -R ../annotations/human_g1k_v37.fasta -I tumor.sorted.realigned.recalibrated.dedup.bam -o tumor.GATK.vcf -L ../annotations/captured_regions.bed
+vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf tumor.BCF.vcf --out tumor.BCF --recode --recode-INFO-all
+vcftools --minQ 20 --max-meanDP 200 --min-meanDP 5 --remove-indels --vcf tumor.GATK.vcf --out tumor.GATK --recode --recode-INFO-all
+vcftools --vcf tumor.BCF.recode.vcf --diff tumor.GATK.recode.vcf --diff-site --out tumor.BCF_vs_GATK
