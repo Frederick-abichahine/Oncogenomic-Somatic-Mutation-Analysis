@@ -1,0 +1,2 @@
+sample	ploidy
+Sample.1	2.27

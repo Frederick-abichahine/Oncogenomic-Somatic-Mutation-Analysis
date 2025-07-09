@@ -1,0 +1,2 @@
+sample	purity	purity.min	purity.max	n.segs	n.SNVs	RMB	BandWidth	log
+Sample.1	0.71	0.71	0.81	4	3	0.47	0.035	computation ok
