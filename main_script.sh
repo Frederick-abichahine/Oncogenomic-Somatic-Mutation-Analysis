@@ -140,3 +140,20 @@ java -Xmx4g -jar ../tools/snpEff/snpSift.jar Annotate ../annotations/hapmap_3.3.
 # Filtering the annotated VCF file: one for SNPs only and one for non-SNPs
 cat somatic.pm.vcf.hapmap_ann.vcf | java -Xmx4g -jar ../tools/snpEff/snpSift.jar filter "(exists ID) & ( ID =~ 'rs' )" > somatic.pm.onlySNPs.vcf
 cat somatic.pm.vcf.hapmap_ann.vcf | java -Xmx4g -jar ../tools/snpEff/snpSift.jar filter "!(exists ID) & !( ID =~ 'rs' )" > somatic.pm.noSNPs.vcf
+
+#################################
+# 9. Purity and Ploidy Estimation
+#################################
+
+# Filtering the control VCF file for biallelic SNPs 
+bcftools view -v snps -m2 -M2 control.BCF.vcf > control.BCF.biallelic_snps.vcf
+# Extracting heterozygous SNPs from the biallelic SNPs VCF file
+grep -E "(^#|0/1)" control.BCF.biallelic_snps.vcf > control.het.biallelic_snps.vcf
+# Counting the allelic reads in the control and tumor samples
+java -jar ../tools/genome_analysis_TK.jar -T ASEReadCounter -R ../annotations/human_g1k_v37.fasta -o control.csv -I control.sorted.realigned.recalibrated.dedup.bam -sites control.het.biallelic_snps.vcf -U ALLOW_N_CIGAR_READS -minDepth 20 --minMappingQuality 20 --minBaseQuality 20
+java -jar ../tools/genome_analysis_TK.jar -T ASEReadCounter -R ../annotations/human_g1k_v37.fasta -o tumor.csv -I tumor.sorted.realigned.recalibrated.dedup.bam -sites control.het.biallelic_snps.vcf -U ALLOW_N_CIGAR_READS -minDepth 20 --minMappingQuality 20 --minBaseQuality 20
+# Generating the somatic.pm and somatic.indel files without the .vcf extension for TPES
+java -jar ../tools/var_scan.v2.3.9.jar somatic control.sorted.realigned.recalibrated.dedup.pileup tumor.sorted.realigned.recalibrated.dedup.pileup --output-snp somatic.pm --output-indel somatic.indel
+
+# Executing the R script for purity and ploidy estimation
+Rscript ../purity_and_ploidy_estimation.R
