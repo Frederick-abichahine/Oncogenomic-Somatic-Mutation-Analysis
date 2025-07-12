@@ -87,7 +87,7 @@ ggsave("figures/ploidy_and_admixture_plot.png", plot = check.plot, width = 10, h
 purity_results <- TPES_purity(ID = "Sample.1", SEGfile = seg.tb,
                               SNVsReadCountsFile = snv.reads,
                               ploidy = pl.table,
-                              RMB = 0.47, maxAF = 0.6, minCov = 10, minAltReads = 10, minSNVs = 1)
+                              RMB = 0.47, maxAF = 0.6, minCov = 8, minAltReads = 8, minSNVs = 1)
 
 # Saving purity results
 write.table(purity_results, file="results/TPES_purity_results.txt", sep="\t", row.names=F, quote=F)
@@ -97,6 +97,6 @@ png("figures/TPES_purity_plot.png", width=2400, height=1800, res=300)
 TPES_report(ID = "Sample.1", SEGfile = seg.tb,
             SNVsReadCountsFile = snv.reads,
             ploidy = pl.table,
-            RMB = 0.47, maxAF = 0.6, minCov = 10, minAltReads = 10, minSNVs = 1)
+            RMB = 0.47, maxAF = 0.6, minCov = 8, minAltReads = 8, minSNVs = 1)
 
 dev.off()
