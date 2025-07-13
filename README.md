@@ -78,3 +78,50 @@ Together, CLONETv2 and TPES provided concordant purity estimates (~71-73%) under
 
 This study applied an integrated genomic analysis pipeline to tumor and matched control samples, enabling the identification of somatic mutations, structural alterations, and clinically actionable variants. Key findings included a pathogenic BRCA1 nonsense mutation and multiple high-impact alterations in cancer-associated genes, supported by functional annotation and visual validation. Mutational signature analysis further contextualized the tumor’s evolutionary history. While some variability in purity estimation was observed, the combined analytical approaches provided a robust framework for characterizing tumor-specific genomic changes and informing potential therapeutic avenues.  
 
+## References  
+
+[1] Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation. Cell. 2011;144(5):646–674. doi:10.1016/j.cell.2011.02.013
+
+[2] Stratton MR, Campbell PJ, Futreal PA. The cancer genome. Nature. 2009;458(7239):719–724. doi:10.1038/nature07943
+
+[3] Mardis ER. Genome sequencing and cancer. Curr Opin Genet Dev. 2012;22(3): 245–250. doi:10.1016/j.gde.2012.03.005
+
+[4] Li H, Handsaker B, Wysoker A, et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics. 2009;25(16):2078–2079. doi:10.1093/bioinformatics/btp352
+
+[5] McKenna A, Hanna M, Banks E, et al. The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data. Genome Res. 2010;20(9):1297–1303. doi:10.1101/gr.107524.110
+
+[6] The International HapMap Consortium. A haplotype map of the human genome. Nature. 2005;437(7063):1299–1320. doi:10.1038/nature04226
+
+[7] Picard Toolkit. Broad Institute. “Picard Toolkit.” 2019. Available at: https://broadinstitute.github.io/picard/ (accessed July 2025)
+
+[8] Koboldt DC, Zhang Q, Larson DE, Shen D, McLellan MD, Lin L, et al. VarScan 2: somatic mutation and copy number alteration discovery in cancer by exome sequencing. Genome Res. 2012;22(3):568–576. https://doi.org/10.1101/gr.129684.111
+
+[9] Seshan VE, Olshen A. DNAcopy: DNA copy number data analysis. R package version 1.72.0. Available at: https://bioconductor.org/packages/release/bioc/html/DNAcopy.html (accessed July 2025)
+
+[10] Danecek P, Bonfield JK, Liddle J, Marshall J, Ohan V, Pollard MO, et al. Twelve years of SAMtools and BCFtools. Gigascience. 2021;10(2):giab008. https://doi.org/10.1093/gigascience/giab008
+
+[11] Cingolani P, Platts A, Wang LL, Coon M, Nguyen T, Wang L, et al. A program for annotating and predicting the effects of single nucleotide polymorphisms, SnpEff: SNPs in the genome of Drosophila melanogaster strain w1118; iso-2; iso-3. Fly (Austin). 2012;6(2):80–92. https://doi.org/10.4161/fly.19695
+
+[12] Robinson JT, Thorvaldsdóttir H, Winckler W, Guttman M, Lander ES, Getz G, Mesirov JP. Integrative genomics viewer. Nat Biotechnol. 2011;29(1):24–26. https://doi.org/10.1038/nbt.1754
+
+[13] COSMIC Mutational Signature Profiler. Wellcome Sanger Institute. Available at: https://cancer.sanger.ac.uk/signatures/assignment/app/ (accessed July 2025)
+
+[14] Prandi D, Baca SC, Romanel A, Barbieri CE, Mosquera JM, Fontugne J, et al. Unraveling the clonal hierarchy of somatic genomic aberrations. Genome Biol. 2014;15(8):439. doi:10.1186/s13059-014-0439-6
+
+[15] Locallo A, Prandi D, Fedrizzi T, Demichelis F. TPES: tumor purity estimation from SNVs. Bioinformatics. 2019;35(21):4433–4435. doi:10.1093/bioinformatics/btz406
+
+[16] Srivastava M, Bubendorf L, Srikantan V, Fossom L, Nolan L, Glasman M, et al. ANX7, a candidate tumor suppressor gene for prostate cancer. Proc Natl Acad Sci USA. 2001;98(8):4575–4580. doi:10.1073/pnas.071055798
+
+[17] Wang H, Sun P, Yao R, Zhang W, Zhou X, Yao J, He K. Comprehensive pan-cancer analysis of PTGES3 and its prognostic role in hepatocellular carcinoma. Front Oncol. 2023;13:1158490. doi:10.3389/fonc.2023.1158490
+
+[18] Saito M, Novak U, Piovan E, Basso K, Sumazin P, Schneider C, et al. BCL6 suppression of BCL2 via Miz1 and its disruption in diffuse large B cell lymphoma. Proc Natl Acad Sci USA. 2009;106(27):11294–11299. https://doi.org/10.1073/pnas.0903854106
+
+[19] Gutiérrez-Vázquez C, Quintana FJ. Regulation of the immune response by the aryl hydrocarbon receptor. Immunity. 2018;48(1):19–33. https://doi.org/10.1016/j.immuni.2017.12.012
+
+[20] Innes JK, Calder PC. Omega-6 fatty acids and inflammation. Prostaglandins Leukot Essent Fatty Acids. 2018;132:41–48. doi: 10.1016/j.plefa.2018.03.004
+
+[21] Ghadirian P, Robidoux A, Nassif E, Martin G, Potvin C, Patocskai E, et al. Screening for BRCA1 and BRCA2 mutations among French-Canadian breast cancer cases attending an outpatient clinic in Montreal. Clin Genet. 2014;85(1):31–35. doi:10.1111/cge.12174
+
+[22] Alexandrov LB, Nik-Zainal S, Wedge DC, Aparicio SAJR, Behjati S, Biankin AV, et al. Signatures of mutational processes in human cancer. Nature. 2013;500(7463): 415–421. doi:10.1038/nature12477
+
+[23] Ciani Y, Fedrizzi T, Prandi D, Lorenzin F, Locallo A, Gasperini P, et al. Allele-specific genomic data elucidate the role of somatic gain and copy-number neutral loss of heterozygosity in cancer. Cell Syst. 2022;13(2):183–193.e7. doi:10.1016/j.cels.2021.10.001
