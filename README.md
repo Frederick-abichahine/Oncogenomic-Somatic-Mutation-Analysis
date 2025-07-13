@@ -52,6 +52,8 @@ After completing the full preprocessing pipeline, both samples showed a substant
 
 Analysis of somatic copy number alterations using CBS revealed a series of genomic segments with altered copy number states. The segmentation plot (Figure 1) displays the log₂ ratios of tumor versus control read depths across genomic regions, with values centered around zero indicating diploid regions. Multiple contiguous regions exhibited reduced log₂ ratios, consistent with somatic copy number losses. In contrast, very few and small segments showed mild elevations, suggesting low-level gains that were not substantial enough to qualify as high-confidence amplifications. Red horizontal lines denote CBS-detected segments, representing the average log₂ ratio across each region. Color alternation between black and green reflects transitions between chromosomal intervals, which, based on the input data, correspond to chromosomes 15 through 18. Collectively, the segmentation results point to localized genomic instability, primarily in the form of deletions that may be implicated in tumor development.  
 
+<img alt="figure1" src="figures/report_figure_1.png">
+
 ### Variant Calling and Annotation  
 
 Variant calling in tumor and control samples revealed substantial differences, with 14,121 and 15,992 discordant sites between the two calling methods, reflecting tool-specific sensitivity and filtering criteria. After applying stringent filters based on read depth, quality, and indel exclusion, 14,123 high-confidence variants remained in the tumor sample. Functional annotation identified 39 high-impact mutations in cancer-relevant genes, including ANXA7 (a tumor suppressor in prostate and brain cancers) [16], PTGES3 (an Hsp90 co-chaperone supporting oncogenic protein stability) [17], and CLTC (involved in chromosomal translocations in lymphomas) [18], suggesting potential roles in tumorigenesis. Lastly, pathway enrichment analysis revealed several significantly affected pathways, including the Aryl Hydrocarbon Receptor Pathway (WP2873), linked to immune regulation and tumor progression [19], and the Omega-6 Fatty Acids in Senescence Pathway (WP5424), which connects lipid signaling to inflammation in cancer [20].  
@@ -62,9 +64,13 @@ To identify clinically relevant variants, the annotated dataset was filtered for
 
 Visualization in IGV (Figure 2) shows 63% reference (C) and 37% alternate (A) allele support in the control sample, indicating heterozygosity. In the tumor, this shifts to 80% A and 20% C, suggesting loss of heterozygosity and enrichment of the pathogenic allele. This allele imbalance supports the somatic relevance of the variant. Known as rs80357472, the mutation is linked to hereditary breast and ovarian cancer (HBOC) and is considered clinically actionable, particularly in the context of PARP inhibitor therapies [21].  
 
+<img alt="figure2" src="figures/report_figure_2.png">
+
 ### Somatic Variant Calling and Annotation  
 
 Paired tumor–control analysis identified 220 high-confidence somatic variants from over 14 million genomic positions, using stringent thresholds for coverage and allele frequency. Additionally, 12,511 germline variants and 2,882 loss of heterozygosity (LOH) events were detected. Missense mutations on chromosome 15 were particularly notable (Table 1). Mutational signature analysis showed high concordance between observed and reconstructed spectra (cosine similarity 0.966, correlation 0.941), based on 14,251 single base substitutions. Three COSMIC SBS signatures were identified: SBS5 (67.5%), a common clock-like, age-related process [22]; SBS1 (16.2%), also age-related via 5-methylcytosine deamination; and SBS54 (16.4%), a rare, poorly characterized signature suggesting a novel mutational process. Overall, the mutational landscape is largely shaped by aging (SBS1, SBS5), with a secondary contribution from SBS54. Tumor mutational burden was 5.1 mutations per megabase using WGS-mode analysis.  
+
+<img alt="table1" src="tables/report_table_1.png">
 
 ### Tumor Purity and Ploidy Analysis  
 
@@ -73,6 +79,10 @@ Tumor purity and ploidy were estimated using SCNA-based CLONETv2 and SNV-based T
 TPES analysis under conservative thresholds (minAltReads=10, minCov=10) identified 4 somatic SNVs with a dominant allele frequency peak at 0.334, corresponding to ~71% purity (0.334/0.47), closely aligning with CLONETv2 (Figure 4). A secondary AF peak at 0.244 was supported by a single SNV. Relaxing filters (minAltReads=8, minCov=8) revealed a high-AF SNV at 0.419 (Supp. Info), suggesting an upper purity bound of ~89%, though based on a single variant and potentially affected by noise.  
 
 Together, CLONETv2 and TPES provided concordant purity estimates (~71-73%) under conservative settings, with TPES hinting at a higher upper limit. The elevated ploidy and loss-dominant profile may reflect gain regions excluded from beta analysis. These results highlight the importance of SNP density and segment representation in purity estimation and support the complementary use of SCNA- and SNV-based methods for tumor characterization [23].  
+
+<img alt="figure3" src="figures/report_figure_3.png">  
+
+<img alt="figure4" src="figures/report_figure_4.png">
 
 ## Conclusion  
 
