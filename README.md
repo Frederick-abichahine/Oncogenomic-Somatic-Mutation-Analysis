@@ -42,3 +42,9 @@ Somatic mutations were identified by comparing tumor and matched control BAM fil
 
 Heterozygous SNPs were identified in control samples using bcftools, and allele-specific read counts were obtained with GATK ASEReadCounter (min depth 20, mapping and base quality ≥20). CLONETv2 R package was used to compute beta tables, ploidy, admixture, and allele-specific copy number profiles from segmented SCNA data and allelic fractions [14]. Tumor purity was estimated with TPES library in R by integrating somatic SNV read counts (min coverage 10, min alternate reads 10, max allele frequency 0.6) with CLONET-derived ploidy, comparing observed allele fractions of heterozygous somatic SNVs to the expected 0.47 [15].  
 
+## Results and Discussion  
+
+### Data Preprocessing  
+
+After completing the full preprocessing pipeline, both samples showed a substantial reduction in read count. The control sample decreased from ~19.7 million reads to 12.9 million after realignment, and to 11.1 million post-deduplication. The tumor sample followed a similar pattern, dropping from 15 million to 9.6 million, then to 8.4 million. The largest losses occurred during realignment, where ~6.8 million (control) and ~5.4 million (tumor) reads were discarded, as expected, as realignment around indels corrects misalignments and exposes low-quality reads that are removed to reduce false positives in downstream analyses. Despite the reduction, mapping rates improved slightly (99.75% to 99.81% for control; 99.96% to 99.98% for tumor), and proper pairing remained high (>99.6%), indicating improved alignment quality. The final BAM files also contained very few singleton reads (0.09% control; 0.01% tumor) or interchromosomal mate pairs (0.03% control; 0.025% tumor), further confirming the integrity of the processed data for downstream analysis.  
+
