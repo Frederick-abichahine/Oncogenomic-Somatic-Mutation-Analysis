@@ -74,3 +74,7 @@ TPES analysis under conservative thresholds (minAltReads=10, minCov=10) identifi
 
 Together, CLONETv2 and TPES provided concordant purity estimates (~71-73%) under conservative settings, with TPES hinting at a higher upper limit. The elevated ploidy and loss-dominant profile may reflect gain regions excluded from beta analysis. These results highlight the importance of SNP density and segment representation in purity estimation and support the complementary use of SCNA- and SNV-based methods for tumor characterization [23].  
 
+## Conclusion  
+
+This study applied an integrated genomic analysis pipeline to tumor and matched control samples, enabling the identification of somatic mutations, structural alterations, and clinically actionable variants. Key findings included a pathogenic BRCA1 nonsense mutation and multiple high-impact alterations in cancer-associated genes, supported by functional annotation and visual validation. Mutational signature analysis further contextualized the tumor’s evolutionary history. While some variability in purity estimation was observed, the combined analytical approaches provided a robust framework for characterizing tumor-specific genomic changes and informing potential therapeutic avenues.  
+
