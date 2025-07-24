@@ -22,7 +22,7 @@ samtools index control.sorted.bam; samtools index tumor.sorted.bam
 
 # Control
 # Creating a bed file with the regions of interest
-java -jar ../tools/genome_analysis_TK.jar -T RealignerTargetCreator -R ../annotations/human_g1k_v37.fasta -I ./control/control.sorted.bam -o ./control/control.realigner.intervals -L ../annotations/captured_regions.bed
+java -jar ../tools/genome_analysis_TK.jar -T RealignerTargetCreator -R ../annotations/human_g1k_v37.fasta -I control.sorted.bam -o control.realigner.intervals -L ../annotations/captured_regions.bed
 # Realigning the bam file around indels
 java -jar ../tools/genome_analysis_TK.jar -T IndelRealigner -R ../annotations/human_g1k_v37.fasta -I control.sorted.bam -targetIntervals control.realigner.intervals -o control.sorted.realigned.bam -L ../annotations/captured_regions.bed
 
